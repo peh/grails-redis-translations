@@ -23,6 +23,14 @@ class TranslationController {
         translationService.clearMissing()
         flash.success = true
         flash.message = g.message(code: 'translator.save.success')
-        redirect(action: 'list')
+        redirect(request.getHeader('referer'))
+    }
+
+    def missing() {
+        [list: translationService.getMissing(), supported: translationService.supportedLocales.language]
+    }
+
+    def stats() {
+        [list: translationService.listKeys()]
     }
 }

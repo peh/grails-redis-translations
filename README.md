@@ -11,6 +11,7 @@ A Frontend to edit messages on the fly.
 
 Usage
 ------------------------
+
 1. Install the plugin
 
 	compile ":redis-translations:0.0.1"

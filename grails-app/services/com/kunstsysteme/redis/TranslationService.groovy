@@ -8,6 +8,8 @@ class TranslationService {
 
     def redisService
     def grailsApplication
+    public static final String READ_COUNT_FIELD = 'read_count'
+    public static final String WRITE_COUNT_FIELD = 'write_count'
 
     def getComplete(String code) {
         redisService.hgetAll(munch(code))
@@ -21,6 +23,8 @@ class TranslationService {
             result = jedis.hget(key, lang)
             if (!result) {
                 jedis.sadd(missingKey, key)
+            } else {
+                jedis.hincrBy(key, READ_COUNT_FIELD, 1)
             }
         }
         result
@@ -28,8 +32,10 @@ class TranslationService {
 
     void set(String code, String value, Locale locale = defaultLocale) {
         def lang = locale.language
+        def key = munch(code)
         redisService.withRedis { Jedis jedis ->
-            jedis.hset(munch(code), lang, value)
+            jedis.hset(key, lang, value)
+            jedis.hincrBy(key, WRITE_COUNT_FIELD, 1)
         }
     }
 
@@ -37,15 +43,27 @@ class TranslationService {
         String key = munch(code)
         redisService.withRedis { Jedis jedis ->
             map.each { lang, value ->
-                if (lang in supportedLocales.language)
+                if (lang in supportedLocales.language) {
                     jedis.hset(key, lang, value)
+                    jedis.hincrBy(key, READ_COUNT_FIELD, 1)
+                }
             }
             jedis.srem(missingKey, key)
         }
     }
 
     def getMissing() {
-        redisService.smembers(missingKey)
+        getAll(redisService.smembers(missingKey))
+    }
+
+    private def getAll(def keys) {
+        def result = [:]
+        redisService.withRedis { Jedis jedis ->
+            keys.each() { key ->
+                result << ["$key": jedis.hgetAll(key)]
+            }
+        }
+        result
     }
 
     def listKeys() {

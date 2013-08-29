@@ -29,11 +29,6 @@
     </div>
 </div>
 <g:javascript>
-    $(document).ready(function () {
-        $('[data-name=clickable]').dblclick(function () {
-            window.location = $(this).data('target')
-        });
-    });
 </g:javascript>
 </body>
 </html>

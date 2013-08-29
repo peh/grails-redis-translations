@@ -45,7 +45,7 @@
         <g:if test="${flash.message}">
             <div class="alert alert-dismissable ${flash.success == true ? 'alert-success' : flash.success == false ? 'alert-danger' : 'alert-info'}">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <strong>Warning!</strong> Best check yo self, you're not looking too good.
+                <g:message code="${flash.message}"/>
             </div>
         </g:if>
     </div>
@@ -55,5 +55,12 @@
     <g:layoutBody/>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 </div>
+<g:javascript>
+    $(document).ready(function () {
+        $('[data-name=clickable]').dblclick(function () {
+            window.location = $(this).data('target')
+        });
+    });
+</g:javascript>
 </body>
 </html>
