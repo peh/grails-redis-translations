@@ -11,31 +11,33 @@ A Frontend to edit messages on the fly.
 
 Usage
 ------------------------
-- Install the plugin
+1. Install the plugin
 
 	compile ":redis-translations:0.0.1"
 
-- Optional: Configure you default locale and your supported locales in Config.groovy see Config
+2. Optional: Configure you default locale and your supported locales in Config.groovy see Config
 
-- Start redis-server (if not running)
+3. Start redis-server (if not running)
 
-- Run the migration script
+4. Run the migration script
 
 	grails translator-migrate
 
-- Optional: Run the translator init script to set all messages used in admin frontend
+5. Optional: Run the translator init script to set all messages used in admin frontend
 
 	grails tranlator-init
 
-- Start you webapp
+6. Start you webapp
 
 	grails run-app
 
-- If the migration ran smoothly, you should not see any difference by now
+7. If the migration ran smoothly, you should not see any difference by now
 
-- point you browser to http://localhost:8080/translation to reach the backoffice
+8. point you browser to http://localhost:8080/translation to reach the backoffice
 
--
+9. ???
+
+10. profit
 
 
 Config
