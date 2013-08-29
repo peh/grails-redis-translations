@@ -1,6 +1,4 @@
-import static java.util.Locale.ENGLISH
-import static java.util.Locale.FRENCH
-import static java.util.Locale.GERMAN
+import static java.util.Locale.*
 
 // configuration for plugin testing - will not be included in the plugin zip
 
