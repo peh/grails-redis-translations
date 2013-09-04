@@ -56,6 +56,32 @@ class TranslationService {
         getAll(redisService.smembers(missingKey))
     }
 
+    def find(String query) {
+        def result = [:]
+        redisService.withRedis { Jedis jedis ->
+            jedis.keys("$prefix*").each { key ->
+                def type = jedis.type(key)
+                if (type == 'set') {
+                    jedis.smembers(key).each { missingKey ->
+                        if (missingKey.contains(query)) {
+                            result << [(demunch(missingKey)): [:]]
+                        }
+                    }
+                } else if (type == 'hash') {
+                    def values = jedis.hgetAll(key)
+                    if (key.contains(query))
+                        result << [(demunch(key)): values]
+                    else
+                        values.each { locale, value ->
+                            if (value == query || value.contains(query))
+                                result << [(demunch(key)): values]
+                        }
+                }
+            }
+        }
+        result
+    }
+
     private def getAll(def keys) {
         def result = [:]
         redisService.withRedis { Jedis jedis ->

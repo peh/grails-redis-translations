@@ -10,12 +10,12 @@
     <div class="col-md-12">
         <table class="table table-striped table-hover">
             <thead>
-                <tr>
-                    <td><g:message code="translator.view.list.column.code" /></td>
-                    <g:each in="${supported}" var="lang">
-                        <td>${lang}</td>
-                    </g:each>
-                </tr>
+            <tr>
+                <td><g:message code="translator.view.list.column.code"/></td>
+                <g:each in="${supported}" var="lang">
+                    <td>${lang}</td>
+                </g:each>
+            </tr>
             </thead>
             <g:each in="${list}" var="item">
                 <tr data-name="clickable" data-target="${g.createLink(action: 'details', params: [key: item.key])}">
@@ -28,7 +28,5 @@
         </table>
     </div>
 </div>
-<g:javascript>
-</g:javascript>
 </body>
 </html>

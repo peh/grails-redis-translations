@@ -21,11 +21,9 @@
                     </div>
                 </div>
             </g:each>
-            <button type="submit" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+            <button type="submit" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-floppy-disk"></span> <g:message code="form.generic.save"/></button>
         </g:form>
     </div>
 </div>
-<g:javascript>
-</g:javascript>
 </body>
 </html>

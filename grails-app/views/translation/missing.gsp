@@ -10,7 +10,7 @@
     <div class="col-md-12">
         <div class="page-header">
             <h1><g:message code="translator.view.missing.heading"/><button id="clear" class="btn btn-danger pull-right"><span></span><g:message
-                    code="translater.view.missing.clear"/></button></h1>
+                    code="translator.view.missing.clear"/></button></h1>
 
         </div>
         <table class="table table-striped table-hover">
